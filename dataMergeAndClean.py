@@ -29,6 +29,7 @@ for file_name in os.listdir(folder_path):
         
         # Read the CSV file into a DataFrame
         df = pd.read_csv(file_path)
+        df['datetime'] = pd.to_datetime(df['datetime'])
         
         # Drop the "name" column
         df.drop(columns=['name'], inplace=True)
@@ -46,6 +47,7 @@ for file_name in os.listdir(folder_path):
         merged_df = pd.concat([merged_df, df], ignore_index=True)
         
 
+merged_df.sort_values(by='datetime', inplace=True)
 
 # Do some processing/cleaning on the merged dataset
 

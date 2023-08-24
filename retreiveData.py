@@ -12,8 +12,8 @@ API4 = 'U86KS9Q5SFJ2YUQ3E8FZWXVQ3'
 
 # Define variables for the API URL
 base_url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Zurich/"
-start_date = "1998-06-02"
-end_date = "2001-01-01"
+start_date = "2006-01-02"
+end_date = "2008-06-01"
 unit_group = "metric"
 include = "days"
 api_key = API4
