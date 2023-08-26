@@ -54,7 +54,7 @@ merged_df.sort_values(by='datetime', inplace=True)
 merged_df['rainTomorrow']= merged_df['precip'].apply(lambda x: 1 if x > 0 else 0)
 merged_df['rainTomorrow'] = merged_df['rainTomorrow'].shift(-1)
 
-merged_df = merged_df[['year', 'month', 'day', 'tempmax', 'tempmin', 'temp', 'humidity','windspeed', 'winddir','cloudcover', 'sealevelpressure','rainTomorrow', 'precip', ]]
+merged_df = merged_df[['year', 'month', 'day', 'season', 'tempmax', 'tempmin', 'temp', 'humidity','windspeed', 'winddir','cloudcover', 'sealevelpressure','rainTomorrow', 'precip', 'precipcover']]
 
 ## check how many values this removes. Since its very small compared to all the entries we don't need to re-adjust the rainTomorrow column
 # I need to fix that caus now it removes quite a bit of Nans
@@ -63,7 +63,7 @@ merged_df.dropna(inplace=True)
         
 
 # Save the merged and transformed data as a Pickle file
-output_file_path = os.path.join(folder_path, 'Zurich_weather_cleaned.pkl')
+output_file_path = 'datasets/Zurich_weather_cleaned.pkl'
 merged_df.to_pickle(output_file_path)
 
 print(f"Merged and transformed data saved as {output_file_path}")

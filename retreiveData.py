@@ -12,11 +12,11 @@ API4 = 'U86KS9Q5SFJ2YUQ3E8FZWXVQ3'
 
 # Define variables for the API URL
 base_url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Zurich/"
-start_date = "2006-01-02"
-end_date = "2008-06-01"
+start_date = "2022-01-02"
+end_date = "2023-08-01"
 unit_group = "metric"
 include = "days"
-api_key = API4
+api_key = API3
 content_type = "csv"
 file_path = os.path.join('data', f"{start_date}_{end_date}.csv")
 

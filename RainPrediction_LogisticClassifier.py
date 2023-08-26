@@ -10,7 +10,7 @@ import seaborn as sns
 from pandas.plotting import table
 
 
-file_path = 'data/Zurich_weather_cleaned.pkl'
+file_path = 'datasets/Zurich_weather_cleaned.pkl'
 
 cleaned_data = pd.read_pickle(file_path)
 
