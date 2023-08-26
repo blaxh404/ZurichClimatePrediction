@@ -18,8 +18,8 @@ def calculate_cluster_percentage(data):
     return percentage
 
 # Find unique cluster values in your data
-unique_clusters_1994_to_1999 = data_1994_to_1999['cluster'].unique()
-unique_clusters_2017_to_2022 = data_2017_to_2022['cluster'].unique()
+unique_clusters_1994_to_1999 = sorted(data_1994_to_1999['cluster'].unique())
+unique_clusters_2017_to_2022 = sorted(data_2017_to_2022['cluster'].unique())
 
 # Create subplots in a loop
 fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
@@ -30,8 +30,9 @@ titles = ['1994-1999 Average Cluster Composition per Month', '2017-2022 Average 
 # Initialize a list to store the handles for legend labels
 legend_handles = []
 
-# Initialize a list to store the colormap values for clusters 0, 1, 2, 3 with colors similar to Viridis
+# Colormap
 cluster_colormap_values = sns.color_palette("Set3", n_colors=4)
+
 
 for i, (data, unique_clusters) in enumerate(datasets):
     ax = axes[i]
@@ -39,7 +40,7 @@ for i, (data, unique_clusters) in enumerate(datasets):
     percentage = percentage[unique_clusters]  # Select available clusters
     
     
-    percentage.plot(kind='bar', stacked=True, ax=ax, width=0.7, color=cluster_colormap_values)
+    percentage.plot(kind='bar', stacked=True, ax=ax, width=0.8, color=cluster_colormap_values)
     ax.set_title(titles[i])
     ax.set_xlabel('Month')
     ax.set_ylabel('% Composition')

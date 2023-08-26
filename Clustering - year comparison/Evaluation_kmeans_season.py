@@ -7,8 +7,8 @@ data_1994_to_1999 = pd.read_pickle('../datasets/zurich_weather_clustered_1994_19
 data_2017_to_2022 = pd.read_pickle('../datasets/zurich_weather_clustered_2017_2022.pkl')
 
 # Get unique cluster labels for each dataset
-clusters_1994_to_1999 = data_1994_to_1999['cluster'].unique()
-clusters_2017_to_2022 = data_2017_to_2022['cluster'].unique()
+clusters_1994_to_1999 = sorted(data_1994_to_1999['cluster'].unique())
+clusters_2017_to_2022 = sorted(data_2017_to_2022['cluster'].unique())
 
 # Define a mapping of season codes to season names and colors
 season_mapping = {1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'}
@@ -31,7 +31,7 @@ for ax, dataset, clusters in zip(axes, [data_1994_to_1999, data_2017_to_2022], [
         bottom = 0
         
         for season, percentage in season_percentage.items():
-            bars = ax.bar(cluster + 1, percentage, label=season, bottom=bottom, color=season_colors[season], alpha=0.7)
+            bars = ax.bar(cluster, percentage, label=season, bottom=bottom, color=season_colors[season], alpha=0.7)
             bottom += percentage
             
             # Add to the legend dictionary if not already present
@@ -41,7 +41,7 @@ for ax, dataset, clusters in zip(axes, [data_1994_to_1999, data_2017_to_2022], [
     ax.set_xlabel('Cluster')
     ax.set_ylabel('Percentage (%)')
     ax.set_title(f'Season Composition by Cluster ({dataset["year"].min()}-{dataset["year"].max()})')
-    ax.set_xticks(clusters + 1)  # Adjust x-ticks for cluster numbering starting from 1
+    ax.set_xticks(clusters)
 
 # Create a unique legend for both subplots
 legend_labels = list(legend_dict.keys())
@@ -51,3 +51,13 @@ fig.legend(legend_handles, legend_labels, title='Season', loc='upper right')
 
 plt.tight_layout()
 plt.show()
+
+# Filter the DataFrame where 'cluster' column equals 1
+filtered_data = data_1994_to_1999[data_1994_to_1999['cluster'] == 2]
+
+# Calculate the percentage of occurrence of each unique entry in 'season'
+season_counts = filtered_data['season'].value_counts(normalize=True) * 100
+
+# Print or use these percentages as needed
+print("Percentage of Occurrence of Each Season:")
+print(season_counts)
