@@ -11,7 +11,7 @@ data_2017_to_2022 = pd.read_pickle('../datasets/zurich_weather_clustered_2017_20
 # Create a 2x3 subplot
 fig, axes = plt.subplots(2, 3, figsize=(18, 8))
 
-# Define the colormap for clusters with reordered rows
+# Define the colormap for clusters
 cluster_colormap_values = sns.color_palette("Set3", n_colors=4)
 cluster_colormap_values = [cluster_colormap_values[3], cluster_colormap_values[1], cluster_colormap_values[0], cluster_colormap_values[2]]
 

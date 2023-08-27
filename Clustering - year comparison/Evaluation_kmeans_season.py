@@ -43,7 +43,7 @@ for ax, dataset, clusters in zip(axes, [data_1994_to_1999, data_2017_to_2022], [
     ax.set_title(f'Season Composition by Cluster ({dataset["year"].min()}-{dataset["year"].max()})')
     ax.set_xticks(clusters)
 
-# Create a unique legend for both subplots
+# Create a legend for both subplots
 legend_labels = list(legend_dict.keys())
 legend_handles = [legend_dict[label] for label in legend_labels]
 
@@ -51,13 +51,3 @@ fig.legend(legend_handles, legend_labels, title='Season', loc='upper right')
 
 plt.tight_layout()
 plt.show()
-
-# Filter the DataFrame where 'cluster' column equals 1
-filtered_data = data_1994_to_1999[data_1994_to_1999['cluster'] == 2]
-
-# Calculate the percentage of occurrence of each unique entry in 'season'
-season_counts = filtered_data['season'].value_counts(normalize=True) * 100
-
-# Print or use these percentages as needed
-print("Percentage of Occurrence of Each Season:")
-print(season_counts)

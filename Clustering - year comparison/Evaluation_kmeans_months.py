@@ -7,9 +7,6 @@ import seaborn as sns
 data_1994_to_1999 = pd.read_pickle('../datasets/zurich_weather_clustered_1994_1999.pkl')
 data_2017_to_2022 = pd.read_pickle('../datasets/zurich_weather_clustered_2017_2022.pkl')
 
-# Assuming the data contains a column named 'month' and a column named 'cluster'
-# You may need to adjust these column names based on your actual dataset structure
-
 # Group data by month and cluster and calculate the average percentage composition of each cluster per month
 def calculate_cluster_percentage(data):
     grouped = data.groupby(['month', 'cluster']).size().unstack(fill_value=0)
@@ -17,11 +14,11 @@ def calculate_cluster_percentage(data):
     percentage = (grouped.T / total).T * 100
     return percentage
 
-# Find unique cluster values in your data
+# Find unique cluster values in the data
 unique_clusters_1994_to_1999 = sorted(data_1994_to_1999['cluster'].unique())
 unique_clusters_2017_to_2022 = sorted(data_2017_to_2022['cluster'].unique())
 
-# Create subplots in a loop
+# Create subplots
 fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
 
 datasets = [(data_1994_to_1999, unique_clusters_1994_to_1999), (data_2017_to_2022, unique_clusters_2017_to_2022)]
@@ -30,8 +27,9 @@ titles = ['1994-1999 Average Cluster Composition per Month', '2017-2022 Average 
 # Initialize a list to store the handles for legend labels
 legend_handles = []
 
-# Colormap
+# Define the colormap for clusters
 cluster_colormap_values = sns.color_palette("Set3", n_colors=4)
+cluster_colormap_values = [cluster_colormap_values[3], cluster_colormap_values[1], cluster_colormap_values[0], cluster_colormap_values[2]]
 
 
 for i, (data, unique_clusters) in enumerate(datasets):
@@ -51,7 +49,7 @@ for i, (data, unique_clusters) in enumerate(datasets):
     # Set cluster legends as '0', '1', '2', etc.
     legend_labels = [str(cluster) for cluster in unique_clusters]
     
-    # Get the handles (containers) of the bars from the last subplot
+    # This is to avoid to get twice the cluster legend
     if i == len(datasets) - 1:
         handles = ax.containers
         legend_handles.extend(handles)  # Extend the list of handles for the final legend
